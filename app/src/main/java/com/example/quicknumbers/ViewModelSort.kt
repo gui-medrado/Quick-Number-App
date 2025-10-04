@@ -1,0 +1,44 @@
+package com.example.quicknumbers
+
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+
+data class UiState (
+    val drawAmountNumber: Int = 1,
+    val initialLimit: Int = 1,
+    val finalLimit: Int = 100,
+    val shouldRepeat: Boolean = false,
+    val currentDrawNumber: Int = 0,
+    val drawNumbers: List<Int> = emptyList()
+)
+
+
+class ViewModelSort: ViewModel() {
+
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+
+
+    fun setDrawAmountNumber(drawAmountNumber: Int) {
+        _uiState.value = _uiState.value.copy(drawAmountNumber = drawAmountNumber)
+    }
+
+    fun setInitialLimit(initialLimit: Int) {
+        _uiState.value = _uiState.value.copy(initialLimit = initialLimit)
+    }
+
+    fun setFinalLimit(finalLimit: Int) {
+        _uiState.value = _uiState.value.copy(finalLimit = finalLimit)
+
+    }
+
+    fun setShouldRepeat(shouldRepeat: Boolean) {
+        _uiState.value = _uiState.value.copy(shouldRepeat = shouldRepeat)
+    }
+
+    fun drawNumbers () {
+
+    }
+}

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Quick Numbers</string>
+    <string name="main_background">Main Background</string>
+    <string name="logo_image">Logo Image</string>
+    <string name="quick_numbers">Quick Numbers</string>
+    <string name="fast_free">Fast &amp; Free</string>
+    <string name="try_label">Try</string>
+    <string name="try_again">Try Again</string>
+    <string name="how_work_the_quick_numbers">How work the quick numbers?</string>
+    <string name="quick_numbers_description">The randomizer generates numbers within the range you specify.</string>
+    <string name="can_i_choose_the_range_of_numbers">Can I choose the range of numbers?</string>
+    <string name="choose_numbers_description">Yes! You can set the minimum and maximum values for the range of drawn numbers.</string>
+    <string name="i_want_to_draw">I want to draw</string>
+    <string name="draw_guide">Define the range and the quantity of numbers, click on "Draw" and see the results on the screen. It\'s fast and easy!</string>
+    <string name="numbers">Numbers</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="not_repeat_number">Not repeat number</string>
+    <string name="result_title">RESULT</string>
+    <string name="number_one">1</string>
+    <string name="draw_result">%1$s RESULT</string>
+</resources>
