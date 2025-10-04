@@ -1,1 +1,43 @@
-/build
+# Gradle files
+.gradle/
+build/
+**/build/
+
+# Local configuration file (sdk path, keystore, etc)
+local.properties
+
+# Log files
+*.log
+
+# Android Studio specific files
+.idea/
+*.iml
+
+# Misc
+.DS_Store
+.env
+/captures/
+.externalNativeBuild/
+.cxx/
+output.json
+
+# Generated files
+*.apk
+*.ap_
+*.aab
+
+# Keystore files (security!)
+*.jks
+*.keystore
+
+# Signing configs
+signing.properties
+
+# Firebase / Google Services
+google-services.json
+app/google-services.json
+
+# Other files
+*.tmp
+*.orig
+*.bak
