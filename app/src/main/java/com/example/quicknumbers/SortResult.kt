@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.quicknumbers.databinding.FragmentSortResultBinding
-import kotlin.random.Random
+import kotlinx.coroutines.launch
 
 class SortResult : Fragment() {
+    private val viewModel: ViewModelSort by activityViewModels()
     private var _binding: FragmentSortResultBinding? = null
     private val binding get() = _binding!!
 
@@ -28,11 +31,20 @@ class SortResult : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("SortResult", "onViewCreated")
 
+
+
         with(binding){
-            fragResultGuide.text = getString(R.string.draw_result, "1")
 
+            lifecycleScope.launch{
 
-            generateSortedNumberText()
+                viewModel.uiState.collect { uiState ->
+
+                    fragResultGuide.text = getString(R.string.draw_result, uiState.currentDrawNumber.toString())
+
+                    clearLastDrewNumbers()
+                    uiState.drawNumbers.forEach{ number -> generateSortedNumberText(number) }
+                }
+            }
         }
     }
 
@@ -42,10 +54,10 @@ class SortResult : Fragment() {
         _binding = null
     }
 
-    private fun FragmentSortResultBinding.generateSortedNumberText() {
+    private fun FragmentSortResultBinding.generateSortedNumberText(number: Int) {
         val tvSortedNumber = TextView(requireContext()).apply {
             id = View.generateViewId()
-            text = Random.nextInt(100).toString()
+            text = number.toString()
             setTextAppearance(R.style.TextAppearance_RobotoMono_Overline)
             textSize = 48f
             setTextColor(ContextCompat.getColor(requireContext(), R.color.content_brand))
@@ -54,5 +66,11 @@ class SortResult : Fragment() {
 
         root.addView(tvSortedNumber)
         fragResultResults.referencedIds = fragResultResults.referencedIds.plus(tvSortedNumber.id)
+    }
+
+    private fun FragmentSortResultBinding.clearLastDrewNumbers() {
+        fragResultResults.referencedIds.forEach {
+            root.removeView(root.findViewById(it))
+        }
     }
 }

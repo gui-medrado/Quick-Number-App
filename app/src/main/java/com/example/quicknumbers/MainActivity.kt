@@ -2,6 +2,7 @@ package com.example.quicknumbers
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.quicknumbers.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel: ViewModelSort by viewModels()
     private lateinit var binding: ActivityMainBinding
     private val navController by lazy {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as? NavHostFragment
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                             text = getString(R.string.try_again)
                             setCompoundDrawablesWithIntrinsicBounds(null, null, AppCompatResources.getDrawable(this@MainActivity, R.drawable.ic_reload),null)
                         }
+
+                        viewModel.drawNumbers()
                     }
                     getString(R.string.try_again) -> {
                         navController?.popBackStack()

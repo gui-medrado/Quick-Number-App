@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlin.random.Random
 
 data class UiState (
     val drawAmountNumber: Int = 1,
@@ -31,7 +32,6 @@ class ViewModelSort: ViewModel() {
 
     fun setFinalLimit(finalLimit: Int) {
         _uiState.value = _uiState.value.copy(finalLimit = finalLimit)
-
     }
 
     fun setShouldRepeat(shouldRepeat: Boolean) {
@@ -39,6 +39,18 @@ class ViewModelSort: ViewModel() {
     }
 
     fun drawNumbers () {
+        val drawNumbers = mutableListOf<Int>();
 
+        repeat(_uiState.value.drawAmountNumber) {
+            var number = Random.nextInt(_uiState.value.initialLimit, _uiState.value.finalLimit)
+
+            while(drawNumbers.contains(number) && !_uiState.value.shouldRepeat) {
+                number = Random.nextInt(_uiState.value.initialLimit, _uiState.value.finalLimit)
+            }
+
+            drawNumbers.add(number)
+        }
+
+        _uiState.value = _uiState.value.copy(currentDrawNumber = _uiState.value.currentDrawNumber + 1, drawNumbers = drawNumbers.toList())
     }
 }
